@@ -1,0 +1,24 @@
+.main:
+    mov r0, 3
+    call .factorial
+    b .exit
+.factorial:
+    cmp r0, 1
+    beq .return
+    bgt .continue
+    b .return
+.continue:
+    sub sp, sp, 8
+    st r0, 0[sp]
+    st ra, 4[sp]
+    sub r0, r0, 1
+    call .factorial
+    ld r2, 0[sp]
+    ld ra, 4[sp]
+    mul r1, r2, r1
+    add sp, sp, 8
+    ret
+.return:
+    mov r1, 1
+    ret
+.exit:
